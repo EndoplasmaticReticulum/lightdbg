@@ -387,11 +387,11 @@ vector<Mnemonic> Tracee::disassemble(pword address, bool att, int count, int& by
 
 Mnemonic Tracee::disassemble(bool att)
 {
-    return disassemble((pword)this->registers.rip, att);
+    return disassemble((pword)this->registers.REG_IP, att);
 }
 
 
 vector<Mnemonic> Tracee::disassemble(bool att, int count, int& bytesCount)
 {
-    return disassemble((pword)this->registers.rip, att, count, bytesCount);
+    return disassemble((pword)this->registers.REG_IP, att, count, bytesCount);
 }
