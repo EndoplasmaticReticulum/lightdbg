@@ -19,6 +19,7 @@ void CommandObfuscate::invoke(DebugLoop& loop, vector<string>& args)
         cout << "Command syntax is: \"obfuscate <type> [<on|off>]\"." << endl;
         cout << "Possible types:" << endl;
         cout << "\t\"traceme\": Makes ptrace(PTRACE_TRACEME, ...) calls from the debugged process succeed." << endl;
+        cout << "\t\"time\": Plays around with the time." << endl;
 
         return;
     }
@@ -55,6 +56,16 @@ void CommandObfuscate::invoke(DebugLoop& loop, vector<string>& args)
         }
 
         cout << "Obfuscation \"traceme\": " << (loop.getObfuscateTraceMe() ? "on" : "off") << "." << endl;
+        return;
+    }
+    else if (args[0] == "time")
+    {
+        if (action != 0)
+        {
+            loop.setObfuscateTime(action == 1);
+        }
+
+        cout << "Obfuscation \"time\": " << (loop.getObfuscateTime() ? "on" : "off") << "." << endl;
         return;
     }
     //Unknown:

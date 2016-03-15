@@ -67,8 +67,10 @@ extern word breakpointInstruction[MAX_BREAKPOINT_INSTRUCTION_WORDS];
 //Some system calls:
 #ifdef __i386__
 #define SYSCALL_PTRACE 26
+#define SYSCALL_TIME 13
 #elif __amd64__
 #define SYSCALL_PTRACE 101
+#define SYSCALL_TIME 201
 #endif
 
 #endif // TYPES_HPP

@@ -54,6 +54,7 @@ private:
     //Obfuscation handling:
     bool obfuscateTraceMe = false;
     bool obfuscateTraceMeTriggered = false;
+    bool obfuscateTime = false;
 
     //The breakpoints:
     bool breakpointsInstalled;
@@ -121,6 +122,8 @@ public:
     //Get/Set the obfuscation flags:
     inline bool getObfuscateTraceMe() const { return this->obfuscateTraceMe; }
     inline void setObfuscateTraceMe(bool flag) { this->obfuscateTraceMe = flag; }
+    inline bool getObfuscateTime() const { return this->obfuscateTime; }
+    inline void setObfuscateTime(bool flag) { this->obfuscateTime = flag; }
 
     //Constructor:
     DebugLoop(Tracee& tracee);

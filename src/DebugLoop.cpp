@@ -262,6 +262,24 @@ void DebugLoop::handleSyscall(word result)
 
             //Triggered:
             this->obfuscateTraceMeTriggered = true;
+            cout << "<Obfuscation> traceme" << endl;
+        }
+        else if (this->obfuscateTime && (this->syscallArgs[0] == SYSCALL_TIME))
+        {
+            //Set the result to 01/01/2000:
+            word newVal = 946684800;
+
+            struct user_regs_struct registers = this->tracee.getRegisters();
+            registers.REG_AX = newVal;
+            this->tracee.setRegisters(registers);
+
+            //Maybe also fix pointer:
+            if ((pword)(syscallArgs[1]) != NULL)
+            {
+                this->tracee.pokeWord((pword)syscallArgs[1], newVal);
+            }
+
+            cout << "<Obfuscation> time" << endl;
         }
     }
 }
