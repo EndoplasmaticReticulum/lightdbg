@@ -51,3 +51,4 @@ HEADERS += \
 
 INCLUDEPATH += ../src
 LIBS += -lbfd -ldl -liberty -lopcodes -lz
+TARGET = ldb

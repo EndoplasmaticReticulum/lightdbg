@@ -1,5 +1,6 @@
 #include "commands/CommandRegisters.hpp"
 
+#include <algorithm>
 #include <iomanip>
 #include <iostream>
 #include <sstream>
@@ -74,97 +75,131 @@ void CommandRegisters::invoke(DebugLoop& loop, vector<string>& args)
         word value = 0;
         istringstream(args[2]) >> hex >> value;
 
+        //Get the register:
+        string reg = args[1];
+        transform(reg.begin(), reg.end(), reg.begin(), ::tolower);
+
         //Change regs struct:
 #ifdef __i386__
-        if (args[1] == "eax")
+        if (reg == "eip")
         {
-            regs.eax = value;
+            regs.eip = value;
         }
-        else
-        {
-            cout << "Unknown register: \"" << args[1] << "\"." << endl;
-            return;
-        }
-
-#elif __amd64__
-        if (args[1] == "rip")
-        {
-            regs.rip = value;
-        }
-        else if (args[1] == "flg")
+        else if (reg == "flg")
         {
             regs.eflags = value;
         }
-        else if (args[1] == "rsp")
+        else if (reg == "esp")
+        {
+            regs.esp = value;
+        }
+        else if (reg == "ebp")
+        {
+            regs.ebp = value;
+        }
+        else if (reg == "eax")
+        {
+            regs.eax = value;
+        }
+        else if (reg == "ebx")
+        {
+            regs.ebx = value;
+        }
+        else if (reg == "ecx")
+        {
+            regs.ecx = value;
+        }
+        else if (reg == "edx")
+        {
+            regs.edx = value;
+        }
+        else if (reg == "esi")
+        {
+            regs.esi = value;
+        }
+        else if (reg == "edi")
+        {
+            regs.edi = value;
+        }
+#elif __amd64__
+        if (reg == "rip")
+        {
+            regs.rip = value;
+        }
+        else if (reg == "flg")
+        {
+            regs.eflags = value;
+        }
+        else if (reg == "rsp")
         {
             regs.rsp = value;
         }
-        else if (args[1] == "rbp")
+        else if (reg == "rbp")
         {
             regs.rbp = value;
         }
-        else if (args[1] == "rax")
+        else if (reg == "rax")
         {
             regs.rax = value;
         }
-        else if (args[1] == "rbx")
+        else if (reg == "rbx")
         {
             regs.rbx = value;
         }
-        else if (args[1] == "rcx")
+        else if (reg == "rcx")
         {
             regs.rcx = value;
         }
-        else if (args[1] == "rdx")
+        else if (reg == "rdx")
         {
             regs.rdx = value;
         }
-        else if (args[1] == "rsi")
+        else if (reg == "rsi")
         {
             regs.rsi = value;
         }
-        else if (args[1] == "rdi")
+        else if (reg == "rdi")
         {
             regs.rdi = value;
         }
-        else if (args[1] == "r8")
+        else if (reg == "r8")
         {
             regs.r8 = value;
         }
-        else if (args[1] == "r9")
+        else if (reg == "r9")
         {
             regs.r9 = value;
         }
-        else if (args[1] == "r10")
+        else if (reg == "r10")
         {
             regs.r10 = value;
         }
-        else if (args[1] == "r11")
+        else if (reg == "r11")
         {
             regs.r11 = value;
         }
-        else if (args[1] == "r12")
+        else if (reg == "r12")
         {
             regs.r12 = value;
         }
-        else if (args[1] == "r13")
+        else if (reg == "r13")
         {
             regs.r13 = value;
         }
-        else if (args[1] == "r14")
+        else if (reg == "r14")
         {
             regs.r14 = value;
         }
-        else if (args[1] == "r15")
+        else if (reg== "r15")
         {
             regs.r15 = value;
         }
+#endif
         else
         {
-            cout << "Unknown register: \"" << args[1] << "\"." << endl;
+            cout << "Unknown register: \"" << reg << "\"." << endl;
             return;
         }
-#endif
 
         //Write it back:
         try
