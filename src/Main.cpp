@@ -33,7 +33,7 @@ int main(int argc, char** argv)
     if (argc <= traceeArgOffset)
     {
         //TODO
-        cout << "Usage here ..." << endl;
+        cout << "Usage:\n\tldb run <path to binary> <binary arguments>\n\tldb attach <pid>" << endl;
         return 0;
     }
 
